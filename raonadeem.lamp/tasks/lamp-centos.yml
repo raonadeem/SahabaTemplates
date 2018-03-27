@@ -1,0 +1,37 @@
+---
+  - name: Install apache
+    yum: name=httpd state=present
+  - name: Copying configuration file to apache
+    template:
+       src=welcome.conf
+       dest=/etc/httpd/conf.d/welcome.conf
+  - name: Adding Index file
+    template:
+       src=index.html
+       dest=/var/www/html/index.html
+  - name: Adding info.php
+    template:
+       src=info.php
+       dest=/var/www/html/info.php
+  - name: Activating apache module
+    apache2_module: 
+      state=present
+      name=userdir
+  - name: Restarting httpd service
+    shell: service httpd restart
+  - name: Deactivate firewalld
+    shell: systemctl disable firewalld
+  - name: Installing mariadb
+    yum: name={{ item }} state=present
+    with_items:
+          - mariadb-server
+          - mariadb
+  - name: Installing python-mysqldb
+    yum: name=MySQL-python state=present
+    notify:
+      - restart mariadb
+  - name: Installing php
+    yum: name=php state=present
+  - name: Installing php5 package
+    yum: name=php-mysql
+         state=latest
