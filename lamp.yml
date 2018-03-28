@@ -1,17 +1,9 @@
----
-- name: httpd install
-  hosts: all
+- hosts: all
+  become: yes
   tasks:
     - name: Add DNS server
       lineinfile:
         dest: "/etc/resolv.conf"
         line: "nameserver 8.8.8.8"
-    - name: package httpd
-      yum:
-        name: httpd
-        state: latest
-    - name: Service httpd
-      service:
-        name: httpd
-        enabled: true
-        state: started
+  roles:
+    - fvarovillodres.lamp
