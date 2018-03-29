@@ -1,9 +1,13 @@
-- hosts: all
+- name: Adding DNS server
+  hosts: all
   become: yes
   tasks:
     - name: Add DNS server
       lineinfile:
         dest: "/etc/resolv.conf"
         line: "nameserver 8.8.8.8"
+- name: Installing Lamp Server        
+  hosts: all
+  become: yes
   roles:
     - fvarovillodres.lamp
