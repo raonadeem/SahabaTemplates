@@ -11,7 +11,4 @@
   hosts: all
   become: yes
   roles:
-    - {role: nginx,
-       nginx_http_params: { sendfile: &quot;on&quot;,
-                          access_log: &quot;/var/log/nginx/access.log&quot;},
-                          nginx_sites: none }
+    - hxpro.nginx
