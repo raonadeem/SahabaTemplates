@@ -13,4 +13,5 @@
   vars:
     jenkins_hostname: localhost
   roles:
+    - binarytemple.java
     - binarytemple.jenkins
