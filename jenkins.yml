@@ -13,4 +13,4 @@
   vars:
     jenkins_hostname: localhost
   roles:
-    - geerlingguy.jenkins
+    - binarytemple.jenkins
