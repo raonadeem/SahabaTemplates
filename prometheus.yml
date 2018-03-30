@@ -1,6 +1,7 @@
 ---
 ############################  Centos  ################################
-#
+# Add the components to be installed in /etc/ansible/roles/lrk.prometheus/defaults/main.yml
+# prometheus_components: [prometheus]
 ######################################################################
 - name: Adding DNS server
   hosts: all
@@ -10,8 +11,7 @@
       lineinfile:
         dest: "/etc/resolv.conf"
         line: "nameserver 8.8.8.8"
-- name: Installing Lamp Server        
+- name: Install Prometheus
   hosts: all
-  become: yes
   roles:
-    - fvarovillodres.lamp
+     - lrk.prometheus

@@ -1,0 +1,29 @@
+---
+###################################  Centos  ################################
+# 1) Remove sleep from /etc/ansible/roles/geerlingguy.mysql/handlers/main.yml
+# 2) ansible-galaxy install geerlingguy.mysql
+#############################################################################
+- name: Adding DNS server
+  hosts: all
+  become: yes
+  tasks:
+    - name: Add DNS server
+      lineinfile:
+        dest: "/etc/resolv.conf"
+        line: "nameserver 8.8.8.8"
+- name: Installing and configuring mysql
+  hosts: all
+  become: yes
+  vars:
+    mysql_root_password: root
+    mysql_databases:
+      - name: example_db
+        encoding: latin1
+        collation: latin1_general_ci
+    mysql_users:
+      - name: test
+        host: "%"
+        password: root
+        priv: "example_db.*:ALL"
+  roles:
+    - { role: geerlingguy.mysql }
