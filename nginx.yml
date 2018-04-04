@@ -11,4 +11,5 @@
   hosts: all
   become: yes
   roles:
+    - hxpro.epel
     - hxpro.nginx
