@@ -10,6 +10,14 @@
       lineinfile:
         dest: "/etc/resolv.conf"
         line: "nameserver 8.8.8.8"
+    - name: Installing firewalld
+      yum:
+        name: firewalld
+        state: latest
+    - name: Running firewalld service
+      service:
+        name: firewalld
+        state: started
 - name: Installing Lamp Server        
   hosts: all
   become: yes
